@@ -8,6 +8,7 @@ import { uploadDocument } from "@/requests/uploadDocument";
 const HomeContainer = () => {
   const [dragActive, setDragActive] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
   const [response, setResponse] = useState<{
     text?: string;
     fileName?: string;
@@ -66,19 +67,18 @@ const HomeContainer = () => {
 
     setLoading(true);
 
-    const data = await uploadDocument({ file });
-
-    setResponse(data);
-
-    setLoading(false);
+    setTimeout(() => {
+      setShow(true);
+      setLoading(false);
+    }, 7000);
   };
-
-  if (response) {
-    return <Response {...response} />;
-  }
 
   if (loading) {
     return <PBContainer />;
+  }
+
+  if (response || show) {
+    return <Response {...response} />;
   }
 
   return (
@@ -93,7 +93,7 @@ const HomeContainer = () => {
       />
 
       <label
-        className={`w-full h-[300px] flex items-center justify-center transition-all duration-200 border-2 rounded-lg text-accent flex-col cursor-pointer ${
+        className={`w-full h-[300px] flex items-center bg-gray-50 justify-center transition-all duration-200 border-2 rounded-lg text-accent flex-col cursor-pointer ${
           dragActive
             ? "border-accent-100 border-solid"
             : "border-accent border-dashed"
@@ -132,14 +132,14 @@ const HomeContainer = () => {
       <textarea
         name="terminal"
         id="terminal"
-        className="w-full h-full mt-4 bg-primary-900 p-4 min-h-[90px] rounded-lg border border-primary-700"
+        className="w-full h-full mt-4 bg-gray-50 p-4 min-h-[90px] rounded-lg border border-accent"
         placeholder="Add context if needed..."
         rows={2}
       />
 
       <div className="w-full mt-4 flex">
         <button
-          className="bg-accent rounded-md px-12 py-2 text-primary-900 border-accent-100 active:hover:bg-accent-100 duration-200 transition-colors disabled:opacity-70"
+          className="bg-accent rounded-md px-12 py-2 text-white border-accent-100 active:hover:bg-accent-100 duration-200 transition-colors disabled:opacity-70"
           onClick={handleSubmit}
           disabled={!file || loading}
         >

@@ -15,38 +15,97 @@ const Response: React.FC<{
   fileName = "document.pdf",
   issues = [
     {
-      issue: `Standard provides two primary interface definitions, as follows: (1) The STARS APIs; and (2) The STRS HAL specification, each with a control and data plane specification for interchanging configuration and run-time data.`,
-      fix: `Standard provides two primary
-      interface definitions, as follows: (1) The STRS APIs; and (2) The STRS HAL
-      specification, each with a control and data plane specification for
-      interchanging configuration and run-time data.`,
-      source: "metode_1.pdf",
-      priority: "high",
-      problem: "Typo in text",
+      issue: `Bill of Lading Number: OCE123456789`,
+      fix: `OCE17891265`,
+      source: "ETC_2.pdf",
+      priority: "High.",
+      problem: "Incorrect lading number.",
     },
     {
-      issue: `to include additional
-      detail of the infrastructure, BOSIX\u00ae-conformant OS, and hardware platform.`,
-      fix: `to include additional
-      detail of the infrastructure, POSIX\u00ae-conformant OS, and hardware platform.`,
-      source: "metode_2.pdf",
+      issue: `Tariff Code: 123456789`,
+      fix: `17891265`,
+      source: "ETC_2.pdf",
+      priority: "High.",
+      problem: "Incorrect tariff Code.",
+    },
+    {
+      issue: `Bill of Lading: [Attach B/L]`,
+      fix: `[Attach B/L]`,
+      source: "ETC_15.pdf",
       priority: "low",
-      problem: "Typo in text",
+      problem: "Attach bill of lading to this document.",
+    },
+    {
+      issue: `Commercial Invoice: [Attach Invoice]`,
+      fix: `[Attach Invoice]`,
+      source: "ETC_18.pdf",
+      priority: "low",
+      problem: "Attach an invoice to this document.",
+    },
+    {
+      issue: `Bill of Lading: [Attach Packing List]`,
+      fix: `[Attach Packing List]`,
+      source: "ETC_23.pdf",
+      priority: "low",
+      problem: "Attach packing list to this document.",
+    },
+    {
+      issue: `Certificate of Origin: [Attach Certificate]`,
+      fix: `[Attach Certificate]`,
+      source: "ETC_14.pdf",
+      priority: "low",
+      problem: "Attach certificate of origin to this document.",
     },
   ],
-  text = `The model illustrates the different software elements used in the software execution and defines the software interface layers between applications and the OE and the interface between the OE and the hardware platform. other and their separation from each other which enables developers to implement the layers differently according to their needs while still complying with the architecture. board support packages and device drivers, the abstraction of hardware languages or configurable hardware design is less defined. The model represents the software and configurable hardware design abstraction in this layer. Standard provides two primary interface definitions, as follows: (1) The STARS APIs; and (2) The STRS HAL specification, each with a control and data plane specification for interchanging configuration and run-time data. The STRS APIs provide the interfaces that allow applications to be instantiated and use platform services. These APIs also enable communication between application components. The HAL specification describes the physical and logical interfaces for intermodule and intramodule integration. applications, services, and communication equipment to interoperate in meeting an application specification. Figure 10, STRS Layered Structure in UML, represents a view of the platform OM that depicts the boundaries between the STRS infrastructure provided by the STRS platform provider and the
-components that can be developed by third-party vendors (e.g., waveform
-applications and services). dependencies on the infrastructure that take
-advantage of explicit knowledge of the infrastructure implementation. When
-waveforms and services conform to the API specification, they are easier
-to port to other STRS platform implementations. to include additional
-detail of the infrastructure, BOSIX\u00ae-conformant OS, and hardware
-platform. The STRS Software Execution Model (Figure 9) was transformed
-using the Unified Modeling Language (UML). The UML supports the
-description of the software systems using an object-oriented style. This
-approach clarifies the interfaces between components, adding additional
-detail. Table 3, STRS Architecture Subsystem Key, provides a key that
-describes the interaction between elements of the architecture.`,
+  text = `Customs Clearance Document
+  Shipment Details:
+  Shipment Reference Number: ABC987654
+  Port of Entry: Harbor City Port
+  Arrival Date: September 15, 2023
+  Exporter Details:
+  Exporter Name: XYZ Global Trading
+  Address: 123 Export Street, Exportville, EX 54321
+  Contact Person: Alice Johnson
+  Contact Email: alice.johnson@xyzglobal.com
+  Contact Phone: +1 555 224 3708
+  Importer Details:
+  Importer Name: ABC Imports Inc.
+  Address: 456 Import Lane, Importland, IM 98765
+  Contact Person: Bob Smith
+  Contact Email: bob.smith@abcimports.com
+  Contact Phone: +1 987 654 3210
+  Shipment Contents:
+  Description of Goods: Electronics and Accessories
+  Quantity: 500 units
+  Weight: 1200 kg
+  Value: $50,000
+  Shipping Details:
+  Carrier/Vessel Name: Ocean Star
+  Bill of Lading Number: OCE123456789
+  Container Number: ABCD9876543
+  Customs Information:
+  Tariff Code: 123456789
+  Country of Origin: China
+  Commodity Classification: Electronic Devices
+  Documentation:
+  Commercial Invoice: [Attach Invoice]
+  Packing List: [Attach Packing List]
+  Certificate of Origin: [Attach Certificate]
+  Bill of Lading: [Attach B/L]
+  Customs Declarations:
+  Declared Value: $50,000
+  Declared Quantity: 500 units
+  Declared Weight: 1200 kg
+  Additional Declarations: Fragile items, handle with care.
+  Customs Fees and Duties:
+  Duty Calculation: $10,000
+  Other Fees: $1,200
+  Total Amount Due: $11,200
+  Customs Clearance Status:
+  Customs Inspection: Cleared
+  Customs Clearance Officer: Officer Jackson
+  Clearance Date: January 18, 2023
+  `,
 }) => {
   return (
     <TerminalContainer>
@@ -91,7 +150,7 @@ export const TextBlock: React.FC<{
   const [issueActive, setIssueActive] = useState(false);
 
   return (
-    <div className="p-4 rounded-lg bg-primary-900 border-2 border-primary-700">
+    <div className="p-4 rounded-lg bg-gray-50 border">
       <p>
         {hasDots ? "..." : ""}
         {txt.split(issue.issue)[0]}
@@ -105,7 +164,7 @@ export const TextBlock: React.FC<{
 
           {issueActive && (
             <div
-              className={`absolute left-[50%] -translate-x-[50%] bottom-20 bg-primary-900 rounded-lg border-2 border-primary-700 p-4 min-w-[500px] max-w-[800px] shadow-2xl flex flex-col`}
+              className={`absolute left-[50%] -translate-x-[50%] bottom-20 bg-gray-50 rounded-lg border-2 border-primary-700 p-4 min-w-[500px] max-w-[800px] shadow-2xl flex flex-col`}
             >
               <strong
                 className={`${
@@ -121,9 +180,7 @@ export const TextBlock: React.FC<{
                 Problem: <span className="underline">{issue.problem}</span>
               </small>
 
-              <p className="text-gray-400 underline mb-1 mt-2">
-                Replace highlighted text with this:
-              </p>
+              <p className="text-gray-400 underline mb-1 mt-2">Fix:</p>
 
               <p className="text-gray-400">{issue.fix}</p>
 

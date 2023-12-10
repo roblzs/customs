@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         accent: {
-          DEFAULT: "#00f7f7",
+          DEFAULT: "#0be8bc",
           100: "#9BFBFB"
         },
         primary: {

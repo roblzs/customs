@@ -14,7 +14,7 @@ const ProgressBar = () => {
       if (newProgress < 100) {
         setProgress(newProgress);
       }
-    }, 1000);
+    }, 100);
 
     return () => clearInterval(timer);
   }, [progress]);
